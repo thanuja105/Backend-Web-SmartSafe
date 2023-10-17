@@ -68,34 +68,35 @@ public class StoreInfo {
 	
 	private Corp  corp;
 	
+	@Column(name="city_name")
 	public String getCityName() {
 		return cityName;
 	}
-
+	@Column(name="city_name")
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
 	}
-
+	@Column(name="zip_code")
 	public String getZipCode() {
 		return zipCode;
 	}
-
+	@Column(name="zip_code")
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-
+	@Column(name="state_name")
 	public String getStateName() {
 		return stateName;
 	}
-
+	@Column(name="state_name")
 	public void setStateName(String stateName) {
 		this.stateName = stateName;
 	}
-
+	@Column(name="street_name")
 	public String getStreetName() {
 		return streetName;
 	}
-
+	@Column(name="street_name")
 	public void setStreetName(String streetName) {
 		this.streetName = streetName;
 	}

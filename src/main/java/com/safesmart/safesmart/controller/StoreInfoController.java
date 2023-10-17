@@ -90,10 +90,10 @@ public class StoreInfoController {
 		return storeInfoService.getStoreInfoService();
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public void addStore(@RequestBody StoreInfoRequest storeInfoRequest) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	public void addStore(@RequestBody StoreInfoRequest storeInfoRequest,@PathVariable("id") Long id) {
 
-		storeInfoService.addStore(storeInfoRequest);
+		storeInfoService.addStore(storeInfoRequest,id);
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)

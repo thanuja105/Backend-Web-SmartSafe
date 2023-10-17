@@ -140,7 +140,7 @@ public class DatabaseRunner implements CommandLineRunner {
 			StoreInfo storeInfo = new StoreInfo();
 			storeInfo.setSerialNumber("UT0");
 			storeInfo.setCorpStoreNo("ABC");
-			storeInfo.setStoreName("XYZ");
+			storeInfo.setStoreName("Default");
 			storeInfo.setStartTime(LocalTime.now());
 			storeInfo.setEndTime(LocalTime.NOON);
 			storeInfo.setStatus(true);

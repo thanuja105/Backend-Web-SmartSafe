@@ -25,12 +25,14 @@ import com.safesmart.safesmart.dto.UserInfoRequest;
 import com.safesmart.safesmart.dto.UserInfoResponse;
 import com.safesmart.safesmart.model.ActionStatus;
 import com.safesmart.safesmart.model.BillValidator;
+import com.safesmart.safesmart.model.Corp;
 import com.safesmart.safesmart.model.Kiosk;
 import com.safesmart.safesmart.model.Locks;
 import com.safesmart.safesmart.model.Printer;
 import com.safesmart.safesmart.model.StoreInfo;
 import com.safesmart.safesmart.model.UserInfo;
 import com.safesmart.safesmart.repository.BillValidatorRepository;
+import com.safesmart.safesmart.repository.CorpRepository;
 import com.safesmart.safesmart.repository.KioskRepository;
 import com.safesmart.safesmart.repository.LocksRepository;
 import com.safesmart.safesmart.repository.PrinterRepository;
@@ -62,6 +64,9 @@ public class StoreInfoService {
 
 	@Autowired
 	private StoreInfoBuilder storeInfoBuilder;
+	
+	@Autowired
+	private CorpRepository corpRepository;
 
 	public StoreInfoResponse getStoreInfoService() {
 		StoreInfo storeInfo = storeInfoRepository.findByStoreName("");
@@ -79,7 +84,7 @@ public class StoreInfoService {
 //				storeInfo.getSerialNumber());
 	}
 
-	public void addStore(StoreInfoRequest storeInfoRequest) {
+	public void addStore(StoreInfoRequest storeInfoRequest,Long id) {
 		StoreInfo storeInfo = storeInfoRepository.findByStoreName(storeInfoRequest.getStoreName());
 		if (storeInfo != null) {
 			throw CommonException.CreateException(CommonExceptionMessage.ALREADY_EXISTS,"StoreName");
@@ -100,8 +105,12 @@ public class StoreInfoService {
 			throw CommonException.CreateException(CommonExceptionMessage.ALREADY_EXISTS, "AccountNumber");
 		}
 		
-		
+		System.out.println("Xyz...."+id);
 		storeInfo = storeInfoBuilder.toModel(storeInfoRequest);
+		Optional<Corp> corp=corpRepository.findById(id);
+		Corp c=corp.get();
+		storeInfo.setCorp(c);
+		
 		storeInfo.setActionStatus(ActionStatus.Created);
 		storeInfoRepository.save(storeInfo);
 
