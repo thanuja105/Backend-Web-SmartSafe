@@ -1,5 +1,7 @@
 package com.safesmart.safesmart.dto;
 
+import java.util.List;
+
 public class CorpResponse {
 	
 private Long id;
@@ -18,22 +20,31 @@ private Long id;
 		
 	 private String streetName;
 	 
+	 private List<Long> storeInfoId;
+	  
+	 private int locations;
+	 
 
-	public CorpResponse(Long id, String corpName, String description, boolean status, String cityName, String zipCode,
-			String stateName, String streetName) {
-		super();
-		this.id = id;
-		this.corpName = corpName;
-		this.description = description;
-		this.status = status;
-		this.cityName = cityName;
-		this.zipCode = zipCode;
-		this.stateName = stateName;
-		this.streetName = streetName;
-	}
+//	public CorpResponse(Long id, String corpName, String description, boolean status, String cityName, String zipCode,
+//			String stateName, String streetName) {
+//		super();
+//		this.id = id;
+//		this.corpName = corpName;
+//		this.description = description;
+//		this.status = status;
+//		this.cityName = cityName;
+//		this.zipCode = zipCode;
+//		this.stateName = stateName;
+//		this.streetName = streetName;
+//	}
+	 
 
 	public Long getId() {
 		return id;
+	}
+
+	public CorpResponse() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public void setId(Long id) {
@@ -95,14 +106,35 @@ private Long id;
 	public void setStreetName(String streetName) {
 		this.streetName = streetName;
 	}
+	
 
-	@Override
-	public String toString() {
-		return "CorpResponse [id=" + id + ", corpName=" + corpName + ", description=" + description + ", status="
-				+ status + ", cityName=" + cityName + ", zipCode=" + zipCode + ", stateName=" + stateName
-				+ ", streetName=" + streetName + "]";
+	
+	
+
+	public List<Long> getStoreInfoId() {
+		return storeInfoId;
 	}
-	 
+
+	public void setStoreInfoId(List<Long> storeInfoId) {
+		this.storeInfoId = storeInfoId;
+	}
+
+	public int getLocations() {
+		return locations;
+	}
+
+	public void setLocations(int locations) {
+		this.locations = locations;
+	}
+
+//	@Override
+//	public String toString() {
+//		return "CorpResponse [id=" + id + ", corpName=" + corpName + ", description=" + description + ", status="
+//				+ status + ", cityName=" + cityName + ", zipCode=" + zipCode + ", stateName=" + stateName
+//				+ ", streetName=" + streetName + "]";
+//	}
+//
+//	
 	 
 	 
 

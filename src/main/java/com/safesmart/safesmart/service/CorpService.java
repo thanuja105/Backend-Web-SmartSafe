@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.safesmart.safesmart.builder.CorpBuilder;
 import com.safesmart.safesmart.common.CommonException;
 import com.safesmart.safesmart.common.CommonExceptionMessage;
 import com.safesmart.safesmart.dto.CorpRequest;
@@ -17,6 +18,7 @@ import com.safesmart.safesmart.dto.PrinterResponse;
 import com.safesmart.safesmart.model.ActionStatus;
 import com.safesmart.safesmart.model.Corp;
 import com.safesmart.safesmart.model.Printer;
+import com.safesmart.safesmart.model.StoreInfo;
 import com.safesmart.safesmart.remoterepository.Remote_CorpRepository;
 import com.safesmart.safesmart.remoterepository.Remote_PrinterRepository;
 import com.safesmart.safesmart.repository.CorpRepository;
@@ -30,6 +32,8 @@ public class CorpService {
 	private CorpRepository corpRepository;
 	@Autowired
 	private Remote_CorpRepository remote_CorpRepository;
+	@Autowired
+	private CorpBuilder corpbuilder;
 	
 	public void add(CorpRequest corpRequest) {
 
@@ -82,14 +86,17 @@ public class CorpService {
 	   
 	   public List<CorpResponse> findAllUser() {
 			// TODO Auto-generated method stub
-			List<Corp> corps = (List<Corp>) corpRepository.findAll();
+//			List<Corp> corps = (List<Corp>) corpRepository.findAll();
+//
+//			List<CorpResponse> corpResponses = new ArrayList<CorpResponse>();
+//			for (Corp corp :corps) {
+//				corpResponses.add(new CorpResponse(corp.getId(),corp.getCorpName(),corp.getDescription(),corp.getStatus(),corp.getStreetName(),
+//						corp.getCityName(),corp.getStateName(),corp.getZipCode()));
+//			}
+//			return corpResponses;
+		   List<Corp> corpInfos = (List<Corp>) corpRepository.findAll();
 
-			List<CorpResponse> corpResponses = new ArrayList<CorpResponse>();
-			for (Corp corp :corps) {
-				corpResponses.add(new CorpResponse(corp.getId(),corp.getCorpName(),corp.getDescription(),corp.getStatus(),corp.getStreetName(),
-						corp.getCityName(),corp.getStateName(),corp.getZipCode()));
-			}
-			return corpResponses;
+			return corpbuilder.toDtoList(corpInfos);
 		}
 	   
 	   public void deleteByCorp(Long Id) {
