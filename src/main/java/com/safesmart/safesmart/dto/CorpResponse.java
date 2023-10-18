@@ -4,7 +4,7 @@ import java.util.List;
 
 public class CorpResponse {
 	
-private Long id;
+    private Long id;
     
     private String corpName;
 	

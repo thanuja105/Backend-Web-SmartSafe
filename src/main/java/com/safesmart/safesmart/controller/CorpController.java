@@ -46,6 +46,14 @@ public class CorpController {
 		corpRequest.setId(Id);
 		corpService.updateCorp(corpRequest);
 	}
+	
+	@RequestMapping(value = "/{corpName}", method = RequestMethod.GET)
+	public CorpResponse findByCorpName(@PathVariable("corpName") String corpName) {
+		System.out.println("abc............................."+corpName);
+		return corpService.findByCorpName(corpName);
+		
+	}
+	
 
 
 }
