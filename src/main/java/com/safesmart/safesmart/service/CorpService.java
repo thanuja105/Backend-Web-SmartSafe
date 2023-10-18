@@ -2,6 +2,7 @@ package com.safesmart.safesmart.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import com.safesmart.safesmart.remoterepository.Remote_CorpRepository;
 import com.safesmart.safesmart.remoterepository.Remote_PrinterRepository;
 import com.safesmart.safesmart.repository.CorpRepository;
 import com.safesmart.safesmart.repository.PrinterRepository;
+import com.safesmart.safesmart.repository.StoreInfoRepository;
 
 @Service
 @Transactional
@@ -34,6 +36,8 @@ public class CorpService {
 	private Remote_CorpRepository remote_CorpRepository;
 	@Autowired
 	private CorpBuilder corpbuilder;
+	@Autowired
+	private StoreInfoRepository storeinforepository;
 	
 	public void add(CorpRequest corpRequest) {
 
@@ -95,8 +99,10 @@ public class CorpService {
 //			}
 //			return corpResponses;
 		   List<Corp> corpInfos = (List<Corp>) corpRepository.findAll();
-
-			return corpbuilder.toDtoList(corpInfos);
+		    
+		   return  corpbuilder.toDtoList(corpInfos);
+			
+		  
 		}
 	   
 	   public void deleteByCorp(Long Id) {
@@ -118,6 +124,31 @@ public class CorpService {
 			corpRepository.save(corp);
 
 		}
+
+	public CorpResponse findByCorpName(String corpName) {
+		
+		int count=0;
+		Corp corp = corpRepository.findByCorpName(corpName);
+		
+		CorpResponse corpresponse=corpbuilder.toDto(corp);
+		
+		System.out.println("xyz........."+corpresponse.getStoreInfoId());
+		
+		List<Long> storeids=corpresponse.getStoreInfoId();
+		
+		System.out.println("Store IDS.............."+storeids);
+
+		for(Long storeid:storeids) {
+		
+		Optional<StoreInfo> storeIdList= storeinforepository.findById(storeid);
+		
+		count++;
+		}
+		
+	corpresponse.setLocations(count);
+	System.out.println(count);
+		return corpresponse;
+	}
 	
 
 	

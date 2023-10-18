@@ -37,6 +37,12 @@ public interface StoreInfoRepository extends PagingAndSortingRepository<StoreInf
 	
 	StoreInfo findByIdentifier(String identifier);
 
+	List<StoreInfo> findByCorp(Long corpid);
+
+//	List<StoreInfo> findByCorp(Long id);
+
+//	Object createQuery(String string, Class<StoreInfo> class1);
+
 	
 	
 
