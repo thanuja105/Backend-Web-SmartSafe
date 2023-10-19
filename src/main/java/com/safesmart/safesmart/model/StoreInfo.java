@@ -102,7 +102,7 @@ public class StoreInfo {
 	}
 
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Corp.class)
     @JoinColumn(name ="corp_id")
 	public Corp getCorp() {
 		return corp;

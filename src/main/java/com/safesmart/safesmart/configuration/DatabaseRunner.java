@@ -152,7 +152,7 @@ public class DatabaseRunner implements CommandLineRunner {
 			userInfo.setUsername("Admin");
 			userInfo.setPassword(passwordEncrypt.encodePassword("1234"));
 			userInfo.setRole(roleRepository.findByName("ADMIN"));
-			userInfo.setStoreInfo(storeInfoRepository.findByStoreName("XYZ"));
+			userInfo.setStoreInfo(storeInfoRepository.findByStoreName("Default"));
 			userInfo.setActionStatus(ActionStatus.Created);
 			userInfoRepository.save(userInfo);
 
