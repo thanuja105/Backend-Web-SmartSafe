@@ -45,7 +45,8 @@ public class CorpBuilder {
 		List<Long> storeInfoIds=new ArrayList<Long>();
 		if(corp.getStoreInfo()!=null) {	
 		for(StoreInfo storeInfo : corp.getStoreInfo()) {
-			storeInfoIds.add(storeInfo.getId());		
+			storeInfoIds.add(storeInfo.getId());
+			
 		}
 		}
 		corpResponse.setStoreInfoId(storeInfoIds);

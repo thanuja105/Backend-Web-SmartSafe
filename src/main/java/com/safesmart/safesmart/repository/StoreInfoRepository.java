@@ -7,6 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import com.safesmart.safesmart.dto.StoreInfoResponse;
+import com.safesmart.safesmart.model.Corp;
 import com.safesmart.safesmart.model.StoreInfo;
 
 @Repository
@@ -37,7 +38,7 @@ public interface StoreInfoRepository extends PagingAndSortingRepository<StoreInf
 	
 	StoreInfo findByIdentifier(String identifier);
 
-	List<StoreInfo> findByCorp(Long corpid);
+	List<StoreInfo> findByCorp(Corp corp);
 
 //	List<StoreInfo> findByCorp(Long id);
 

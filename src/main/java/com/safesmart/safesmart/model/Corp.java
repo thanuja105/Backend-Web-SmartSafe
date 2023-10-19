@@ -58,7 +58,7 @@ public class Corp {
       private ActionStatus actionStatus;
 	
     @Transient
-    @OneToMany(targetEntity = StoreInfo.class, mappedBy = "crop", cascade = CascadeType.ALL, 
+    @OneToMany(targetEntity = StoreInfo.class, mappedBy = "corp", cascade = CascadeType.ALL, 
     fetch = FetchType.EAGER)
 	private List<StoreInfo> storeInfo; 
     

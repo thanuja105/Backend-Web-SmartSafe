@@ -127,26 +127,32 @@ public class CorpService {
 
 	public CorpResponse findByCorpName(String corpName) {
 		
-		int count=0;
+		
 		Corp corp = corpRepository.findByCorpName(corpName);
+		
 		
 		CorpResponse corpresponse=corpbuilder.toDto(corp);
 		
-		System.out.println("xyz........."+corpresponse.getStoreInfoId());
+		Optional<Corp> abc =corpRepository.findById(corpresponse.getId());
 		
-		List<Long> storeids=corpresponse.getStoreInfoId();
+		abc.stream().forEach(hello->{
+			
 		
-		System.out.println("Store IDS.............."+storeids);
-
-		for(Long storeid:storeids) {
-		
-		Optional<StoreInfo> storeIdList= storeinforepository.findById(storeid);
-		
-		count++;
+		List<Long> list=new ArrayList<Long>();
+		int count=0;
+		List<StoreInfo> storeIdList= storeinforepository.findByCorp(hello);
+		for(StoreInfo storeinfo: storeIdList) {
+			list.add(storeinfo.getId());
+		count++;	
 		}
 		
-	corpresponse.setLocations(count);
-	System.out.println(count);
+		corpresponse.setStoreInfoId(list);
+		corpresponse.setLocations(count);
+		});	
+		
+
+		
+	
 		return corpresponse;
 	}
 	
