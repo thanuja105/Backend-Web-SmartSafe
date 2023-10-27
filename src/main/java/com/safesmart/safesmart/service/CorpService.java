@@ -94,18 +94,21 @@ public class CorpService {
 	   
 	   
 	   public List<CorpResponse> findAllUser() {
-			// TODO Auto-generated method stub
-//			List<Corp> corps = (List<Corp>) corpRepository.findAll();
-//
-//			List<CorpResponse> corpResponses = new ArrayList<CorpResponse>();
-//			for (Corp corp :corps) {
-//				corpResponses.add(new CorpResponse(corp.getId(),corp.getCorpName(),corp.getDescription(),corp.getStatus(),corp.getStreetName(),
-//						corp.getCityName(),corp.getStateName(),corp.getZipCode()));
-//			}
-//			return corpResponses;
+		
+		  boolean today=false;
+		  
 		   List<Corp> corpInfos = (List<Corp>) corpRepository.findAll();
+		   List<CorpResponse> corpss=new ArrayList<>();
+		   for(Corp corpinfo:corpInfos) {
+			   System.out.println("we are in foreach loop...................");
+			  if(!today) {
+				 CorpResponse response =findByCorpName(corpinfo.getCorpName(),today);
+				 corpss.add(response);
+			  }
+			  
+		   }
 		    
-		   return  corpbuilder.toDtoList(corpInfos);
+		   return  corpss;
 			
 		  
 		}
