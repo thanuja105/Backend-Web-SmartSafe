@@ -26,6 +26,8 @@ public class CorpResponse {
 	 
 	 private int todayInsertBillsAmount;
 	 
+	 private List<StoreInfoResponse> storeInfoResponse;
+	 
 
 //	public CorpResponse(Long id, String corpName, String description, boolean status, String cityName, String zipCode,
 //			String stateName, String streetName) {
@@ -137,6 +139,15 @@ public class CorpResponse {
 		this.todayInsertBillsAmount = todayInsertBillsAmount;
 	}
 
+	public List<StoreInfoResponse> getStoreInfoResponse() {
+		return storeInfoResponse;
+	}
+
+	public void setStoreInfoResponse(List<StoreInfoResponse> storeInfoResponse) {
+		this.storeInfoResponse = storeInfoResponse;
+	}
+
+	
 //	@Override
 //	public String toString() {
 //		return "CorpResponse [id=" + id + ", corpName=" + corpName + ", description=" + description + ", status="

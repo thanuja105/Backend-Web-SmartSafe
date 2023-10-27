@@ -78,6 +78,8 @@ public class StoreInfoResponse {
 	private String streetName;
 	
 	private String  corp;
+	
+	private int totalInsertBillsAmount;
 
 
 	
@@ -398,6 +400,14 @@ public class StoreInfoResponse {
 
 	public void setCorp(String corp) {
 		this.corp = corp;
+	}
+
+	public int getTotalInsertBillsAmount() {
+		return totalInsertBillsAmount;
+	}
+
+	public void setTotalInsertBillsAmount(int totalInsertBillsAmount) {
+		this.totalInsertBillsAmount = totalInsertBillsAmount;
 	}
 	
 	
