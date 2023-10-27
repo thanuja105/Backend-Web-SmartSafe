@@ -17,6 +17,7 @@ import com.safesmart.safesmart.dto.CorpResponse;
 import com.safesmart.safesmart.dto.EODReport;
 import com.safesmart.safesmart.dto.PrinterRequest;
 import com.safesmart.safesmart.dto.PrinterResponse;
+import com.safesmart.safesmart.dto.StoreInfoResponse;
 import com.safesmart.safesmart.model.ActionStatus;
 import com.safesmart.safesmart.model.Corp;
 import com.safesmart.safesmart.model.Printer;
@@ -145,6 +146,7 @@ public class CorpService {
 		int grandTotal = 0;
 		List<Long> list=new ArrayList<Long>();
 		int count=0;
+		List<StoreInfoResponse> storeinfolist=new ArrayList<>();
 		List<StoreInfo> storeIdList= storeinforepository.findByCorp(hello);
 		for(StoreInfo storeinfo: storeIdList) {
 			list.add(storeinfo.getId());
@@ -152,20 +154,32 @@ public class CorpService {
 		List<EODReport> eodResponse=new ArrayList<>();
 		eodResponse=dashBoardService.getEodReports(storeinfo.getStoreName(),toDay);
 		
+		
+		StoreInfoResponse	storeInfoResponse = dashBoardService.getAllStoreInfo(storeinfo.getStoreName());
+		
+			
+		
 		for (EODReport eodReport : eodResponse) {
 			int totalValue=eodReport.getTotalValue();
-			System.out.println(eodReport.getTotalValue());
+			System.out.println("idividual "+storeinfo.getStoreName()+"insertbill Amount is:"+eodReport.getTotalValue());
+			storeInfoResponse.setTotalInsertBillsAmount(totalValue);
 		    grandTotal=grandTotal+ totalValue;
 			
 		}
-		System.out.println(grandTotal);
+		storeinfolist.add(storeInfoResponse);
+		
+		corpresponse.setStoreInfoResponse(storeinfolist);
+		
 				
+		
+		
 		}
 		
 		
 		corpresponse.setStoreInfoId(list);
 		corpresponse.setLocations(count);
 		corpresponse.setTodayInsertBillsAmount(grandTotal);
+	
 		});	
 		
 		return corpresponse;
