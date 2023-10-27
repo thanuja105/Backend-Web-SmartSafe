@@ -14,6 +14,7 @@ import com.safesmart.safesmart.common.CommonException;
 import com.safesmart.safesmart.common.CommonExceptionMessage;
 import com.safesmart.safesmart.dto.CorpRequest;
 import com.safesmart.safesmart.dto.CorpResponse;
+import com.safesmart.safesmart.dto.EODReport;
 import com.safesmart.safesmart.dto.PrinterRequest;
 import com.safesmart.safesmart.dto.PrinterResponse;
 import com.safesmart.safesmart.model.ActionStatus;
@@ -38,6 +39,9 @@ public class CorpService {
 	private CorpBuilder corpbuilder;
 	@Autowired
 	private StoreInfoRepository storeinforepository;
+	
+	@Autowired
+	private DashBoardService dashBoardService;
 	
 	public void add(CorpRequest corpRequest) {
 
@@ -125,7 +129,7 @@ public class CorpService {
 
 		}
 
-	public CorpResponse findByCorpName(String corpName) {
+	public CorpResponse findByCorpName(String corpName,boolean toDay) {
 		
 		
 		Corp corp = corpRepository.findByCorpName(corpName);
@@ -133,26 +137,37 @@ public class CorpService {
 		
 		CorpResponse corpresponse=corpbuilder.toDto(corp);
 		
+		
 		Optional<Corp> abc =corpRepository.findById(corpresponse.getId());
 		
 		abc.stream().forEach(hello->{
 			
-		
+		int grandTotal = 0;
 		List<Long> list=new ArrayList<Long>();
 		int count=0;
 		List<StoreInfo> storeIdList= storeinforepository.findByCorp(hello);
 		for(StoreInfo storeinfo: storeIdList) {
 			list.add(storeinfo.getId());
 		count++;	
+		List<EODReport> eodResponse=new ArrayList<>();
+		eodResponse=dashBoardService.getEodReports(storeinfo.getStoreName(),toDay);
+		
+		for (EODReport eodReport : eodResponse) {
+			int totalValue=eodReport.getTotalValue();
+			System.out.println(eodReport.getTotalValue());
+		    grandTotal=grandTotal+ totalValue;
+			
 		}
+		System.out.println(grandTotal);
+				
+		}
+		
 		
 		corpresponse.setStoreInfoId(list);
 		corpresponse.setLocations(count);
+		corpresponse.setTodayInsertBillsAmount(grandTotal);
 		});	
 		
-
-		
-	
 		return corpresponse;
 	}
 	

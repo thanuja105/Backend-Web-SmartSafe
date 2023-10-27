@@ -24,6 +24,8 @@ public class CorpResponse {
 	  
 	 private int locations;
 	 
+	 private int todayInsertBillsAmount;
+	 
 
 //	public CorpResponse(Long id, String corpName, String description, boolean status, String cityName, String zipCode,
 //			String stateName, String streetName) {
@@ -125,6 +127,14 @@ public class CorpResponse {
 
 	public void setLocations(int locations) {
 		this.locations = locations;
+	}
+
+	public int getTodayInsertBillsAmount() {
+		return todayInsertBillsAmount;
+	}
+
+	public void setTodayInsertBillsAmount(int todayInsertBillsAmount) {
+		this.todayInsertBillsAmount = todayInsertBillsAmount;
 	}
 
 //	@Override
