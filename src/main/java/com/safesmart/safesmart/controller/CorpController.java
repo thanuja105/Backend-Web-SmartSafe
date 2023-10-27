@@ -47,10 +47,10 @@ public class CorpController {
 		corpService.updateCorp(corpRequest);
 	}
 	
-	@RequestMapping(value = "/{corpName}", method = RequestMethod.GET)
-	public CorpResponse findByCorpName(@PathVariable("corpName") String corpName) {
+	@RequestMapping(value = "/{corpName}/{toDay}", method = RequestMethod.GET)
+	public CorpResponse findByCorpName(@PathVariable("corpName") String corpName, @PathVariable("toDay") boolean toDay) {
 		System.out.println("abc............................."+corpName);
-		return corpService.findByCorpName(corpName);
+		return corpService.findByCorpName(corpName,toDay);
 		
 	}
 	
